@@ -33,4 +33,11 @@ public class HungerGamesService {
     public int getGiftsCount() {
         return gifts.size();
     }
+
+    // 2
+    public List<Tribut> filterTributes(int district, Status status) {
+        return tributes.stream()
+                .filter(t -> t.getDistrikt() == district && t.getStatus() == status)
+                .collect(Collectors.toList());
+    }
 }

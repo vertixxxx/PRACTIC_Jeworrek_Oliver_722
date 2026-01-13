@@ -29,10 +29,21 @@ public class HungerGamesController {
             for (Tribut t : service.getAllTributes()) {
                 System.out.println(t);
             }
+
+            // 2
+            handleDistrictFilter();
         } catch (IOException e) {}
 
-
-
-
+    }
+    private void handleDistrictFilter() {
+        System.out.print("Input district: ");
+        Scanner scanner = new Scanner(System.in);
+        if (scanner.hasNextInt()) {
+            int distrikt = scanner.nextInt();
+            List<Tribut> filtered = service.filterTributes(distrikt, Status.LEBENDIG);
+            filtered.forEach(System.out::println);
+        } else {
+            System.out.println("Invalid input");
+        }
     }
 }

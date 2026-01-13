@@ -31,19 +31,26 @@ public class HungerGamesController {
             }
 
             // 2
-            handleDistrictFilter();
+            System.out.print("Input district: ");
+            Scanner scanner = new Scanner(System.in);
+            if (scanner.hasNextInt()) {
+                int distrikt = scanner.nextInt();
+                List<Tribut> filtered = service.filterTributes(distrikt, Status.LEBENDIG);
+                filtered.forEach(System.out::println);
+            } else {
+                System.out.println("Invalid input");
+            }
+
+            //3
+            System.out.println("\nTribute sortate:");
+            List<Tribut> sorted = service.getSortedTributes();
+            sorted.forEach(System.out::println);
+
+            //4
+            service.writeSortedTributes("C:\\Users\\hsvdg\\OneDrive\\Documents\\VSCode_Projects\\PRACTIC_Jeworrek_Oliver_722\\src\\main\\java\\org\\example\\tributes_sorted.txt");
+
         } catch (IOException e) {}
 
     }
-    private void handleDistrictFilter() {
-        System.out.print("Input district: ");
-        Scanner scanner = new Scanner(System.in);
-        if (scanner.hasNextInt()) {
-            int distrikt = scanner.nextInt();
-            List<Tribut> filtered = service.filterTributes(distrikt, Status.LEBENDIG);
-            filtered.forEach(System.out::println);
-        } else {
-            System.out.println("Invalid input");
-        }
-    }
+
 }

@@ -40,4 +40,23 @@ public class HungerGamesService {
                 .filter(t -> t.getDistrikt() == district && t.getStatus() == status)
                 .collect(Collectors.toList());
     }
+
+    //3
+    public List<Tribut> getSortedTributes() {
+        return tributes.stream()
+                .sorted(Comparator.comparingInt(Tribut::getSkillLevel).reversed()
+                        .thenComparing(Tribut::getName))
+                .collect(Collectors.toList());
+    }
+
+    //4
+    public void writeSortedTributes(String filename) throws IOException {
+        List<Tribut> sorted = getSortedTributes();
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+            for (Tribut tribut : sorted) {
+                writer.write(tribut.toString());
+                writer.newLine();
+            }
+        }
+    }
 }
